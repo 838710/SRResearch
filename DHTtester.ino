@@ -33,7 +33,7 @@ Servo servo;
 // tweak the timings for faster processors.  This parameter is no longer needed
 // as the current DHT reading algorithm adjusts itself to work on faster procs.
 
-const float target = 40.0; //Change for each interval of humidity
+const float target = 30.0; //Change for each interval of humidity
 boolean isOn = false;
 void setup() {
   Serial.begin(9600);
@@ -69,7 +69,7 @@ void loop() {
   // Compute heat index in Celsius (isFahreheit = false)
   float hic = dht.computeHeatIndex(t, h, false);
 
-  if(isOn)
+  /*if(isOn)
     Serial.print("On | ");
   else
     Serial.print("Off | ");
@@ -83,7 +83,10 @@ void loop() {
   Serial.print(hic);
   Serial.print("°C ");
   Serial.print(hif);
-  Serial.println("°F");
+  Serial.println("°F");*/
+  Serial.print(isOn);
+  Serial.print(",");
+  Serial.println(h);
 
   if (h > target && !isOn){ //trial starts with dehumidifier off after reaching target automatically
     servo.write(24); //turn on
